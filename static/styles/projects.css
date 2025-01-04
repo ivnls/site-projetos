@@ -1,0 +1,51 @@
+/* CSS dos cards*/
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-evenly;
+    padding-bottom: 2em;
+}
+
+.col-12 {
+    cursor: pointer;
+    background-color: #f8f9fa;
+    padding-top: 1em;
+    padding-inline: 1.5em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.col-12:hover {
+    background-color: #e0e0e0;
+}
+
+.title-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.persons {
+    display: flex;
+    gap: 5px;
+}
+
+.persons i {
+    font-size: 24px;
+    color: #6c757d;
+}
+
+.project-date {
+    margin-top: 1em;
+}
+
+@media (max-width: 768px) {
+    .row {
+        padding-inline: 1em;
+    }
+
+    .lead {
+        font-size: 0.8em;
+    }
+}
+  
