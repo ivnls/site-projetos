@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 
 static_html = {
     "prefix": "Projetos",
-    "copyright": "© 2025 Copyright - Ivnls IFRS",
+    "copyright": "© 2025 Copyright - IvnLS IFRS",
     "supdivisor": """
     <div>
         <div class="sup-divisor">
