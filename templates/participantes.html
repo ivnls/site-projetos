@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/reset.css')}}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/default.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/participantes.css')}}">
+    <title>{{ static.prefix }} {{ static.sufix }}</title>
+</head>
+<header class="d-flex justify-content-between align-items-center p-3">
+    <img src="{{ url_for('static', filename='assets/white_logo.png')}}" alt="Logo" class="img-fluid">
+    <nav>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/"><i class="bi bi-house"></i> Início</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/projetos"><i class="bi bi-kanban"></i> Projetos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/participantes"><i class="bi bi-people"></i> Participantes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/publicacoes"><i class="bi bi-mailbox"></i> Publicações</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+{{ static.supdivisor|safe }}
+
+<body>
+
+    <div class="d-flex justify-content-center my-4">
+        <div class="btn-group" role="group" aria-label="Group of buttons">
+            <button id="show-participantes" class="btn btn-outline-secondary fs-5 active">Participantes</button>
+            <button id="show-coordenadores" class="btn btn-outline-secondary fs-5">Coordenadores</button>
+        </div>
+    </div>       
+
+    <div class="container py-5">
+        <div class="row participantes-section">
+            {% for participante in participantes %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ participante.image_url }}" class="card-img-top" alt="Imagem de {{ participante.name }}" style="border-radius: 15px 15px 0 0;">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold">{{ participante.nome }}</h5>
+                        <p class="card-text">{{ participante.cargo }}</p>
+                        <div class="flex-column align-items-start d-grid">
+                            <a href="https://lattes.cnpq.br/" type="button" class="btn btn-outline-primary">Currículo Lates</a>
+                            <p class="lead-6 text-secondary mt-3">Contato</p>
+                            <p class="font-weight-bold">{{ participante.email}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row coordenadores-section d-none">
+            {% for coordenador in coordenadores %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ coordenador.image_url }}" class="card-img-top" alt="Imagem de {{ coordenador.name }}" style="border-radius: 15px 15px 0 0;">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold">{{ coordenador.nome }}</h5>
+                        <p class="card-text">{{ coordenador.cargo }}</p>
+                        <div class="flex-column align-items-start d-grid">
+                            <a href="https://lattes.cnpq.br/" type="button" class="btn btn-outline-primary">Currículo Lates</a>
+                            <p class="lead-6 text-secondary mt-3">Contato</p>
+                            <p class="font-weight-bold">{{ coordenador.email}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="text-white text-center py-3">
+        {{ static.copyright }}
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+5hz5HJp0I1K7gtj0Hf4v8f7b5X+N" crossorigin="anonymous"></script>
+
+</body>
+
+<script>
+    document.getElementById('show-participantes').addEventListener('click', function() {
+        document.querySelector('.participantes-section').classList.remove('d-none');
+        document.querySelector('.coordenadores-section').classList.add('d-none');
+
+        document.getElementById('show-participantes').classList.add('active');
+        document.getElementById('show-coordenadores').classList.remove('active');
+    });
+    document.getElementById('show-coordenadores').addEventListener('click', function() {
+        document.querySelector('.participantes-section').classList.add('d-none');
+        document.querySelector('.coordenadores-section').classList.remove('d-none');
+
+        document.getElementById('show-coordenadores').classList.add('active');
+        document.getElementById('show-participantes').classList.remove('active');
+    });
+</script>
+</html>

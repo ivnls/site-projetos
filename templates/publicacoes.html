@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/reset.css')}}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/cards.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/default.css')}}">
+    <title>{{ static.prefix }} {{ sufix }}</title>
+</head>
+<header class="d-flex justify-content-between align-items-center p-3">
+    <img src="{{ url_for('static', filename='assets/white_logo.png')}}" alt="Logo" class="img-fluid">
+    <nav>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/"><i class="bi bi-house"></i> Início</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/projetos"><i class="bi bi-kanban"></i> Projetos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/participantes"><i class="bi bi-people"></i> Participantes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/publicacoes"><i class="bi bi-mailbox"></i> Publicações</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+{{ static.supdivisor|safe }}
+
+<body>
+    <h1 class="text-center mb-5">Publicações Recentes</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="container ">
+                <div class="row">
+                    {% for publicacao in publicacoes %}
+                    <div class="col-12 mb-4" onclick="window.location.href='/publicacao{{ loop.index }}'">
+                        <div class="title-row">
+                            <h1 class="h3">{{ publicacao.titulo }}</h1>
+                        </div>
+                        <div class="text-row">
+                            <div class="lead" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                              {{ publicacao.descricao }}
+                            </div>
+                          </div>
+                        <p class="project-date">{{ publicacao.data }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-white text-center py-3">
+        {{ static.copyright }}
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+5hz5HJp0I1K7gtj0Hf4v8f7b5X+N" crossorigin="anonymous"></script>
+</body>
+</html>
